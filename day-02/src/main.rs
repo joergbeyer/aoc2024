@@ -133,38 +133,4 @@ mod tests {
         let text = TEXT.to_string();
         assert_eq!(4, part2(&text, true));
     }
-
-    #[test]
-    fn test_parse_ranges() {
-        let text = "2-4,6-8
-2-3,4-5
-5-7,7-9
-2-8,3-7
-6-6,4-6
-2-6,4-8"
-            .to_string();
-        assert_eq!(2, parse_ranges(&text, true));
-        assert_eq!(2, parse_ranges2(&text, true));
-        assert_eq!(2, parse_ranges3(&text, true));
-    }
-    #[test]
-    fn test_parse_cols() {
-        let text = "    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 "
-            .to_string();
-        let res: String = parse_col(&text, 1usize, true).into_iter().collect();
-        assert_eq!(String::from(" NZ1"), res);
-        assert_eq!(
-            String::from(" NZ1"),
-            parse_col(&text, 1usize, true)
-                .into_iter()
-                .collect::<String>()
-        );
-        assert_eq!(
-            String::from("DCM2"),
-            parse_col_to_string(&text, 5usize, true)
-        );
-    }
 }
