@@ -35,11 +35,12 @@ fn is_solvable(
 ) -> bool {
     (result <= *target) && {
         if vals.is_empty() {
-            return result == *target;
+            result == *target
+        } else {
+            let head = vals[0];
+            ops.iter()
+                .any(|op| is_solvable(target, op(result, head), &vals[1..], ops))
         }
-        let head = vals[0];
-        ops.iter()
-            .any(|op| is_solvable(target, op(result, head), &vals[1..], ops))
     }
 }
 
