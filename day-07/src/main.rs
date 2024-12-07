@@ -26,24 +26,21 @@ fn op_concat(a: i128, b: i128) -> i128 {
     let s = format!("{}{}", a, b);
     s.parse::<i128>().expect("should be 2 numbers")
 }
+
 fn is_solvable(
     target: &i128,
     result: i128,
     vals: &[i128],
     ops: &Vec<&dyn Fn(i128, i128) -> i128>,
 ) -> bool {
-    if result <= *target {
+    (result <= *target) && {
         if vals.is_empty() {
             return result == *target;
         }
         let head = vals[0];
-        for op in ops {
-            if is_solvable(target, op(result, head), &vals[1..], ops) {
-                return true;
-            }
-        }
+        ops.iter()
+            .any(|op| is_solvable(target, op(result, head), &vals[1..], ops))
     }
-    false
 }
 
 fn part1(inp: &str, verbose: bool) -> i128 {
